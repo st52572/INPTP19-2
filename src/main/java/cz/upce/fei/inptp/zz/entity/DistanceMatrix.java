@@ -1,4 +1,5 @@
 package cz.upce.fei.inptp.zz.entity;
+
 import java.util.NoSuchElementException;
 /**
  *
@@ -17,8 +18,9 @@ public class DistanceMatrix {
     public double get(String from, String to) throws NoSuchElementException{
         int fromIndex = getLocationIndex(from);
         int toIndex = getLocationIndex(to);
-        if (fromIndex < 0 || toIndex < 0) 
+        if (fromIndex < 0 || toIndex < 0) {
             throw new NoSuchElementException("Inserted location was not found.");
+        }
         return distances[fromIndex][toIndex];
     }
 
