@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.upce.fei.inptp.zz.entity;
-
+import java.util.NoSuchElementException;
 /**
  *
  * @author Roman
@@ -19,26 +14,22 @@ public class DistanceMatrix {
         this.distances = distances;
     }
     
-    public double get(String from, String to) {
-        int f, t;
-
-        f = getLocationIndex(from);
-        t = getLocationIndex(to);
-        
-        return distances[f][t];
+    public double get(String from, String to) throws NoSuchElementException{
+        int fromIndex = getLocationIndex(from);
+        int toIndex = getLocationIndex(to);
+        if (fromIndex < 0 || toIndex < 0) 
+            throw new NoSuchElementException("Inserted location was not found.");
+        return distances[fromIndex][toIndex];
     }
 
-    private int getLocationIndex(String value){
+    private int getLocationIndex(String value) {
         for (int i = 0; i < locations.length; i++) {
-            String location = locations[i];
-
-            if (location.equals(value)) {
+            if (locations[i].equals(value)) {
                 return i;
             }
         }
+
         return -1;
     }
-    
-    
     
 }
